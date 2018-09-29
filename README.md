@@ -10,5 +10,6 @@ Build an web scraper for medium articles by subject
 
 ## TODO:
 
--   Support tags / subject input.
+-   Tackle infinite scrolling issue
+-   Support multiple tags / subject input.
 -   Build a dashboard based on the articles gathered.
