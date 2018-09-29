@@ -1,28 +1,31 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
 
 (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    const url = 'https://medium.com/';
+    // this url can be changed
+    // if it is changed, you need to update the query selectors beneath.
+    const url = 'https://medium.com/topic/technology';
 
     await page.goto(url);
-
-    //problems to solve:
-    // only tackles 1 item at a time, due to medium DOM setup
-    // tried it with another link, that worked fine 
+    // TODO: 
+    // h3 is way too general, need an concrete DOM element
     const articles = await page.evaluate(() => 
-        Array.from(document.querySelectorAll('.streamItem'))
+        Array.from(document.querySelectorAll('h3'))
         .map(streamItem => ({
-            title: streamItem.querySelector('h3').textContent.trim(),
-            url: streamItem.querySelector('.ds-link').href
+            title: streamItem.textContent.trim(),
+            url: streamItem.querySelector('a').href
         }))
+        
     );
 
     // TODO / IDEAS:
     // output file to an index file
     // add to array when new items come in
     // Setup front-end to use the data
-
-    console.log(articles);
+    
+    let data = JSON.stringify(articles);
+    fs.writeFileSync('data.json', data);
     await browser.close();
 })();
