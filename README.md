@@ -8,7 +8,7 @@ Right now it is set to Hackernoon articles, this can be changed if you search fo
 - Clone the repo
 - `cd` into it
 - ```Npm install```
-- ```Nodemon index```
+- ```Nodemon index```  
  Sidenote: there is no front-end just response in the cli.
 
 ## Idea
